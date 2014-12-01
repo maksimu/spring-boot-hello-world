@@ -1,19 +1,28 @@
-I've created a stripped down spring boot project that demonstrates this problem.  You can git it at
+This application demonstrates an issue we had moving from spring-framework 4.1.0 to 4.1.1 (and it exists in 4.1.2)
 
-https://github.com/funkyvisions/spring-boot-hello-world
+The @Resource injection seems to behave different because it thinks the method doing the injection is a bridge.
 
-you can toggle these 2 lines in the pom file
+You can toggle these 2 lines in the pom file to see the problem
 
-       <version>1.1.9.RELEASE</version>
-       <!--<version>1.2.0.RC2</version>-->
+        <springframework-version>4.1.0.RELEASE</springframework-version>
+        <!--<springframework-version>4.1.1.RELEASE</springframework-version>-->
 
-Version 1.1.9.RELEASE of spring-boot will use spring-framework 4.0.8.RELEASE.  
-Version 1.2.0.RC2 will use 4.1.2.RELEASE (a version with the problem).
-
-Notice that only in the 4.0.8 version does the 
+Notice that only in the 4.1.0 version does the
 
 ***********************  Setting HttpServletRequest!!!!!
 
-line show up.  In the 4.1.2 it does not (just like our scenario).
+line show up.  In the 4.1.1 it does not.  Meaning the injection never occurred.
 
-I'm suspecting it has to do with the abstract class and isBridge(), so I need to play around with concrete classes and see how it behaves.
+I'm suspecting it has to do with the abstract class and isBridge().
+
+If I change the @Resource to @Autowired then it works as expected.
+
+I am running under Java 1.8.0_25-b17.
+
+Here's the change that I think broke it.
+
+https://github.com/spring-projects/spring-framework/commit/f4219ca06bbd1c324567ab9e74d0d18693359810#diff-2
+
+It was to resolve
+
+https://jira.spring.io/browse/SPR-12187

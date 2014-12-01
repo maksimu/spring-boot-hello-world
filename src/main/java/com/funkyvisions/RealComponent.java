@@ -1,11 +1,8 @@
-package org.oclc;
+package com.funkyvisions;
 
 import org.springframework.stereotype.Component;
 
 @Component
 public final class RealComponent extends AbstractComponent {
 
-    @Override
-    protected void implementme() {
-    }
 }
