@@ -4,8 +4,8 @@ The @Resource injection seems to behave different because it thinks the method d
 
 You can toggle these 2 lines in the pom file to see the problem
 
-        <springframework-version>4.1.0.RELEASE</springframework-version>
-        <!--<springframework-version>4.1.1.RELEASE</springframework-version>-->
+        <spring.version>4.1.0.RELEASE</spring.version>
+        <!--<spring.version>4.1.1.RELEASE</spring.version>-->
 
 Notice that only in the 4.1.0 version does the
 
