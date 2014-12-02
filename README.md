@@ -15,7 +15,8 @@ line show up.  In the 4.1.1 it does not.  Meaning the injection never occurred.
 
 I'm suspecting it has to do with the abstract class and isBridge().
 
-If I change the @Resource to @Autowired then it works as expected.
+If I change the @Resource to @Autowired then it works as expected. It will also work if I change the abstract
+class to public.
 
 I am running under Java 1.8.0_25-b17.
 
